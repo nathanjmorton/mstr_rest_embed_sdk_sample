@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST Library API Embedding Test</title>
+  <script src="http://localhost:8080/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
+  <style>
+    *, *:before, *:after {
+      background: #333; color: #DDD;
+    }
+    h1 {text-align: center;}
+    /* make the DOM elements appear side-by-side */
+    .container {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .flex {
+      border: 5px solid #aa1414; flex: 1 1 auto;
+      border-radius: 5px;
+    display: flex; margin: 5px;
+    }
+    .flex > iframe {
+      flex: 1 1 auto;
+    display: flex; /* new */
+    }
+  </style>
+</head>
+<body>
+  <h1>Conifer Embed Demo</h1>
+  <div class="main">
+    <div class="container">
+      <div class="flex" id="dossier1"></div>
+      <div class="flex" id="dossier2"></div>
+    </div>
+    <div class="container">
+      <div class="flex" id="dossier3"></div>
+      <div class="flex" id="dossier4"></div>
+    </div>
+  </div>
+<script>
+  // DOM element to inject
+  var dossier1 = document.querySelector('#dossier1'),
+    dossier2 = document.querySelector('#dossier2'),
+    dossier3 = document.querySelector('#dossier3'),
+    dossier4 = document.querySelector('#dossier4'),
+    // dossier URL
+    dossier1URL = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/F2619BA311EA788B19570080EF0567DD/WC6942D5631B5431AAB655A0CBE1A820A--K46',
+    dossier2URL = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/EBB3931011EA78F3A74B0080EFF5C6D2/K53--K46',
+    dossier3URL = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/B8FDB3EE11EA78F1804A0080EF2528D7/K53--K46',
+    dossier4URL = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/F3D83CBD11EA78F3B1430080EF05E8D6/W105--K46';
+
+  // on document load call microstrategy dot dossier dot create with props (React naming convention for javascript object properties argument)
+  document.addEventListener("DOMContentLoaded", function(){
+      loadDossier1(); 
+      loadDossier2();
+      loadDossier3();
+      loadDossier4();
+  });
+
+  function loadDossier1() {
+    microstrategy.dossier.create({
+      // DOM element to inject
+      placeholder: dossier1,
+      // dossier URL
+      url: dossier1URL,
+      enableResponsive: true,
+      // varies based on the dossier 
+      containerHeight: '220px',
+      dockedTOC: {
+        dockedPosition: "left",
+        theme: "dark",
+        canClose: false,
+        dockChangeable: false,
+        isDocked: true
+      },
+      navigationBar: {
+        enabled: true,
+        gotoLibrary: false,
+        title: false,
+        toc: true,
+        reset: true,
+        reprompt: false,
+        share: false,
+        comment: true,
+        notification: false,
+        filter: true,
+        options: true,
+        search: false,
+        bookmark: true
+      }
+    });
+  };
+  function loadDossier2() {
+    microstrategy.dossier.create({
+      placeholder: dossier2,
+      url: dossier2URL,
+      enableResponsive: true,
+      containerHeight: '190px',
+      dockedTOC: {
+        dockedPosition: "left",
+        theme: "dark",
+        canClose: false,
+        dockChangeable: false,
+        isDocked: true
+      },
+      navigationBar: {
+        enabled: true,
+        gotoLibrary: false,
+        title: false,
+        toc: true,
+        reset: true,
+        reprompt: false,
+        share: false,
+        comment: true,
+        notification: false,
+        filter: true,
+        options: true,
+        search: false,
+        bookmark: true
+      }
+    });
+  };
+  function loadDossier3() {
+    microstrategy.dossier.create({
+      placeholder: dossier3,
+      url: dossier3URL,
+      enableResponsive: true,
+      containerHeight: '400px',
+      dockedTOC: {
+        dockedPosition: "left",
+        theme: "dark",
+        canClose: false,
+        dockChangeable: false,
+        isDocked: true
+      },
+      navigationBar: {
+        enabled: true,
+        gotoLibrary: false,
+        title: false,
+        toc: true,
+        reset: true,
+        reprompt: false,
+        share: false,
+        comment: true,
+        notification: false,
+        filter: true,
+        options: true,
+        search: false,
+        bookmark: true
+      }
+    });
+  };
+  function loadDossier4() {
+    microstrategy.dossier.create({
+      placeholder: dossier4,
+      url: dossier4URL,
+      enableResponsive: true,
+      containerHeight: '400px',
+      dockedTOC: {
+        dockedPosition: "left",
+        theme: "dark",
+        canClose: false,
+        dockChangeable: false,
+        isDocked: true
+      },
+      navigationBar: {
+        enabled: true,
+        gotoLibrary: false,
+        title: false,
+        toc: true,
+        reset: true,
+        reprompt: false,
+        share: false,
+        comment: true,
+        notification: false,
+        filter: true,
+        options: true,
+        search: false,
+        bookmark: true
+      }
+    });
+  };
+</script>
+</body>
+</html>

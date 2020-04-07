@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST Library API Embedding Test</title>
+    <link rel="icon" href="favicon.ico" type="image/gif" sizes="16x16">
+    <!-- INFO: embedding lib at local (static version) -->
+    <script src="embeddinglib.js"></script>
+    <!-- INFO: fallback embedding lib from the localhost library; uncomment src below in case of error -->
+    <!-- <script src="http://localhost:8080/MicroStrategyLibrary/javascript/embeddinglib.js"></script> -->
+  <style>
+    /* INFO: dark theme & normalize */
+    *, *:before, *:after {
+      background: #333; color: #DDD;
+      margin: 0; padding: 0;
+      font-family:Arial, Helvetica, sans-serif
+    }
+    h1 {text-align: center; }
+    /* INFO: make the DOM elements appear side-by-side */
+    .container {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .flex {
+      border: 3px solid #aa1414; flex: 1 1 auto;
+    display: flex; margin: 5px;
+    }
+    .flex > iframe {
+      flex: 1 1 auto;
+    display: flex; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Conifer Embed Demo</h1>
+  <!-- INFO: DOM injection points -->
+  <div class="main">
+    <div class="container">
+      <div class="flex" id="dossier1"></div>
+      <div class="flex" id="dossier2"></div>
+    </div>
+    <div class="container">
+      <div class="flex" id="dossier3"></div>
+      <div class="flex" id="dossier4"></div>
+    </div>
+  </div>
+<script>
+  'use strict'
+  // INFO: template variables (query the DOM for dossier injection elements)
+   var dossier1 = document.querySelector('#dossier1');
+   var dossier2 = document.querySelector('#dossier2');
+   var dossier3 = document.querySelector('#dossier3');
+   var dossier4 = document.querySelector('#dossier4');
+
+  // TOOD: (required) set urls for each dossier to be injected into the DOM  
+  var dossier1_url = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/F2619BA311EA788B19570080EF0567DD/WC6942D5631B5431AAB655A0CBE1A820A--K46';
+  var dossier2_url = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/EBB3931011EA78F3A74B0080EFF5C6D2/K53--K46';
+  var dossier3_url = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/B8FDB3EE11EA78F1804A0080EF2528D7/K53--K46';
+  var dossier4_url = 'http://localhost:8080/MicroStrategyLibrary/app/953853924FB9060997E0F78B15F30E8B/F3D83CBD11EA78F3B1430080EF05E8D6/W105--K46';
+
+  // TODO: (optional) set standardized dossierHeight property
+  var dossierHeight = '280px';
+
+  // TODO: (optional) set height property for each dossier individually (eg last object)
+  var dossiersObj = [
+      {
+        placeholder: dossier1,
+        url: dossier1_url,
+        height: dossierHeight
+      },  {
+        placeholder: dossier2,
+        url: dossier2_url,
+        height: dossierHeight
+      },  {
+        placeholder: dossier3,
+        url: dossier3_url,
+        height: dossierHeight
+      },  {
+        placeholder: dossier4,
+        url: dossier4_url,
+        height: '280px'
+      }
+    ];
+
+  // INFO: call runDossiers on document load
+  document.addEventListener("DOMContentLoaded", function(){  
+      runDossiers();
+  });
+
+  // INFO: call loadDossier for each dossier object with args passed to mstr create
+  var runDossiers = function runDossiers(dossiers) {
+    dossiersObj.forEach(function (dossier) {
+      var placeholder = dossier.placeholder,
+          url = dossier.url,
+          height = dossier.height;
+      loadDossier(placeholder, url, height);
+    });
+  };
+  
+  // INFO: pass args to microstrategy create
+  var loadDossier = function (placeholder, url, height) {
+    microstrategy.dossier.create({
+      // INFO: DOM element to inject
+      placeholder: placeholder,
+      // INFO: dossier URL
+      url: url,
+      enableResponsive: true,
+      // INFO: height varies based on the dossier 
+      // INFO: note: maximizing the viz standardizes the dossier size in rendering. also to get the TOC maximize the browser (the dossier needs sufficient width to display TOC)
+      containerHeight: height,
+      dockedTOC: {
+        dockedPosition: "left",
+        theme: "dark",
+        canClose: false,
+        dockChangeable: false,
+        isDocked: true
+      },
+      navigationBar: {
+        enabled: true,
+        gotoLibrary: false,
+        title: false,
+        toc: true,
+        reset: true,
+        reprompt: false,
+        share: false,
+        comment: true,
+        notification: false,
+        filter: true,
+        options: true,
+        search: false,
+        bookmark: true
+      }
+    });
+  }
+</script>
+</body>
+</html>
