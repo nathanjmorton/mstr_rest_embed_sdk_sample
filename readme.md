@@ -1,7 +1,9 @@
 # MSTR JS REST API Embedding Demo 
 
 - Download & unzip into tomcat webapps as standalone folder (html and its assets should be at folder root)
-- Edit html file where it says "TODO:" (required or optional)
+- Log into Library on tomcat to get a session to share with the app
+- Load up Dossiers into Library and get their URLs
+- Edit html file where it says "TODO:" (required or optional) to set dossier URLs
 - Browse to tomcat webapp directory
 - All set!
 
